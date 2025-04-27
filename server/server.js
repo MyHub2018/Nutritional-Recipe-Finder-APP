@@ -1,21 +1,19 @@
+// server.js
 const express = require("express");
 const cors = require("cors");
 const bodyParser = require("body-parser");
-const dotenv = require("dotenv");
-
-dotenv.config(); // Load environment variables
+const recipeRoutes = require("./routes/recipeRoutes");
 
 const app = express();
-const port = 5000;
+const PORT = 5000;
 
 // Middleware
 app.use(cors());
-app.use(bodyParser.json()); // To parse JSON bodies
+app.use(bodyParser.json()); // Middleware to parse JSON
 
 // Routes
-const recipeRoutes = require("./routes/recipeRoutes");
-app.use("/api", recipeRoutes); // Mount recipeRoutes on /api
+app.use("/api/recipes", recipeRoutes);
 
-app.listen(port, () => {
-  console.log(`Server running on http://localhost:${port}`);
+app.listen(PORT, () => {
+  console.log(`Server running on http://localhost:${PORT}`);
 });
